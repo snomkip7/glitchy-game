@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvjr7v2vo47t"]
+
+[ext_resource type="Script" path="res://MainMenu.cs" id="1_vdi3o"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vdi3o")
+
+[node name="TempLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 210.0
+offset_right = 966.0
+offset_bottom = 407.0
+theme_override_font_sizes/font_size = 57
+text = "this is the main menu
+welcome to glitchy game"
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33
+anchor_top = 0.544
+anchor_right = 0.525
+anchor_bottom = 0.824
+offset_left = -0.600037
+offset_top = -0.52002
+offset_right = -6.10352e-05
+offset_bottom = 11.08
+theme_override_font_sizes/font_size = 70
+text = "Play"
+
+[connection signal="pressed" from="PlayButton" to="." method="playLevel"]

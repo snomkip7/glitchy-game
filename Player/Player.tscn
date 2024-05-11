@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl6vut51bbrya"]
+
+[ext_resource type="Script" path="res://Player/Player.cs" id="1_a5ldf"]
+[ext_resource type="Texture2D" uid="uid://dqw1xbxod8y8g" path="res://icon.svg" id="1_sdffs"]
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 31
+script = ExtResource("1_a5ldf")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_sdffs")
+
+[node name="PlayerCollision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(64, -53, 64, 53, 53, 64, -53, 64, -64, 53, -64, -53, -53, -64, 53, -64)
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 30.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_right_margin = 0.1
+editor_draw_limits = true
+editor_draw_drag_margin = true
