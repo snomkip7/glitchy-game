@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2r3tx52suqjb"]
+[gd_scene load_steps=5 format=3 uid="uid://b2r3tx52suqjb"]
 
 [ext_resource type="TileSet" uid="uid://cvcadxyw5jh7a" path="res://Levels/tiles.tres" id="1_t7wl4"]
 [ext_resource type="PackedScene" uid="uid://bl6vut51bbrya" path="res://Player/Player.tscn" id="2_0vavq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mre5i"]
-size = Vector2(16808, 20)
+size = Vector2(16808, 2238)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jvba8"]
+size = Vector2(1310, 6792)
 
 [node name="Level1" type="Node2D"]
 
@@ -16,9 +19,36 @@ layer_0/tile_data = PackedInt32Array(917504, 0, 0, 917505, 0, 0, 917506, 0, 0, 9
 [node name="Player" parent="." instance=ExtResource("2_0vavq")]
 
 [node name="DeathZone" type="Area2D" parent="."]
+position = Vector2(-34, 2462)
+metadata/_edit_group_ = true
 
 [node name="DeathShape" type="CollisionShape2D" parent="DeathZone"]
-position = Vector2(0, 1500)
 shape = SubResource("RectangleShape2D_mre5i")
 
+[node name="DeathZone4" type="Area2D" parent="."]
+position = Vector2(-34, -960)
+metadata/_edit_group_ = true
+
+[node name="DeathShape" type="CollisionShape2D" parent="DeathZone4"]
+position = Vector2(0, -1109)
+shape = SubResource("RectangleShape2D_mre5i")
+
+[node name="DeathZone2" type="Area2D" parent="."]
+position = Vector2(4000, 0)
+metadata/_edit_group_ = true
+
+[node name="DeathShape" type="CollisionShape2D" parent="DeathZone2"]
+position = Vector2(645, 0)
+shape = SubResource("RectangleShape2D_jvba8")
+
+[node name="DeathZone3" type="Area2D" parent="."]
+position = Vector2(-2975, 11)
+metadata/_edit_group_ = true
+
+[node name="DeathShape" type="CollisionShape2D" parent="DeathZone3"]
+shape = SubResource("RectangleShape2D_jvba8")
+
 [connection signal="body_entered" from="DeathZone" to="Player" method="fallOutOfMap"]
+[connection signal="body_entered" from="DeathZone4" to="Player" method="fallOutOfMap"]
+[connection signal="body_entered" from="DeathZone2" to="Player" method="fallOutOfMap"]
+[connection signal="body_entered" from="DeathZone3" to="Player" method="fallOutOfMap"]

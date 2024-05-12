@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmj4c5ayt7pys"]
+
+[ext_resource type="Script" path="res://Player/Spear.cs" id="1_dhvt3"]
+[ext_resource type="Texture2D" uid="uid://dqw1xbxod8y8g" path="res://icon.svg" id="1_y0twt"]
+
+[node name="Spear" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_dhvt3")
+
+[node name="SpearSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -133.5)
+scale = Vector2(0.109375, 2.35156)
+texture = ExtResource("1_y0twt")
+
+[node name="SpearCollision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-7, 10, -6, 17, 6, 17, 7, 10, 7, -269, 6, -284, -6, -284, -7, -269)
+
+[node name="UseTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="UseTimer" to="." method="changeDirection"]
