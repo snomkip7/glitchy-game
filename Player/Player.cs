@@ -10,12 +10,19 @@ public partial class Player : CharacterBody2D
 	public Timer scrollTimer;
 	public bool weaponAvailable = true;
 	public Timer weaponTimer;
+	public Timer dmgTimer;
+	public Color color;
+	public int health = 3;
+	public int count = 0;
 
     public override void _Ready()
     {
+		color = Modulate;
         globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
 		scrollTimer = GetNode<Timer>("ScrollTimer");
 		weaponTimer = GetNode<Timer>("WeaponTimer");
+		dmgTimer = GetNode<Timer>("DmgTimer");
+		
 		for(int i=0;i<globalVariables.inventory.Count;i++){
 			Sprite2D sprite = new Sprite2D();
 			sprite.Scale = new Vector2(.5f, .5f);
@@ -83,7 +90,8 @@ public partial class Player : CharacterBody2D
 
 	public void fallOutOfMap(Node2D body){
 		GD.Print("Skill issue");
-		CallDeferred("respawn");
+		health = 1;
+		takeDmg();
 	}
 
 	public void respawn(){
@@ -97,9 +105,33 @@ public partial class Player : CharacterBody2D
 			GetNode<Sprite2D>("UILayer/Inventory"+(i+1)).Position = new Vector2(camera.X-1150+i*82, camera.Y-590);
 		}
 		GetNode<Sprite2D>("UILayer/Selected").Position = new Vector2(camera.X-1150+selectedSlot*82, camera.Y-590);
+		for(int i=0;i<health;i++){
+			GetNode<Sprite2D>("UILayer/Health"+i).Position = new Vector2(camera.X+1150-i*80, camera.Y-590);
+		}
 	}
 
 	public void weaponOver(){
 		weaponAvailable = true;
+	}
+
+	public void takeDmg(){
+		health--;
+		GetNode<Sprite2D>("UILayer/Health"+health).QueueFree();
+		Modulate = new Color(255, color.G, color.B);
+		dmgTimer.Start();
+	}
+
+	public void dmgDone(){
+		Modulate = color;
+		if(health<=0){
+			CallDeferred("respawn");
+		}
+	}
+
+	public void endEntered(Node2D body){
+		if(count==globalVariables.enemyCount){
+			GD.Print(count);
+			globalVariables.nextLvl();
+		}
 	}
 }

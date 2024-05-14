@@ -37,7 +37,7 @@ public partial class Spear : Weapon
 		SetCollisionLayerValue(4, true);
 		GD.Print("Starting attack with spear");
 		GetNode<Timer>("UseTimer").Start(.15f);
-		GetParent<Player>().weaponTimer.Start(.5);
+		GetParent<Player>().weaponTimer.Start(.85);
 	}
 
 	public void changeDirection(){

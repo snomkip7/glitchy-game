@@ -13,6 +13,7 @@ public partial class MainMenu : Control
 	// }
 
 	public void playLevel(){
+		GetNode<GlobalVariables>("/root/GlobalVariables").enemyCount = 5;
 		GetTree().ChangeSceneToFile("res://Levels/Level1.tscn");
 	}
 }

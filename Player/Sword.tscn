@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cegkvie76pkp"]
+
+[ext_resource type="Texture2D" uid="uid://dqw1xbxod8y8g" path="res://icon.svg" id="1_jio1n"]
+[ext_resource type="Script" path="res://Player/Sword.cs" id="1_u67oa"]
+
+[node name="Sword" type="CharacterBody2D"]
+script = ExtResource("1_u67oa")
+
+[node name="SwordCollision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-7, 10, -6, 17, 6, 17, 7, 10, 7, -154, 6, -166, -6, -166, -7, -154)
+
+[node name="SwordSprite" type="Sprite2D" parent="."]
+modulate = Color(0.427451, 1, 0.74902, 1)
+position = Vector2(0, -74.5001)
+scale = Vector2(0.109375, 1.42969)
+texture = ExtResource("1_jio1n")

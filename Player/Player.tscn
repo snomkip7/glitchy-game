@@ -23,6 +23,24 @@ position = Vector2(-912, -496)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_sdffs")
 
+[node name="Health0" type="Sprite2D" parent="UILayer"]
+modulate = Color(1, 0.301961, 0.235294, 1)
+position = Vector2(907, -498)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_sdffs")
+
+[node name="Health1" type="Sprite2D" parent="UILayer"]
+modulate = Color(1, 0.301961, 0.235294, 1)
+position = Vector2(827, -497)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_sdffs")
+
+[node name="Health2" type="Sprite2D" parent="UILayer"]
+modulate = Color(1, 0.301961, 0.235294, 1)
+position = Vector2(747, -497)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_sdffs")
+
 [node name="PlayerCamera" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 30.0
@@ -40,4 +58,9 @@ one_shot = true
 [node name="WeaponTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="DmgTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="timeout" from="WeaponTimer" to="." method="weaponOver"]
+[connection signal="timeout" from="DmgTimer" to="." method="dmgDone"]

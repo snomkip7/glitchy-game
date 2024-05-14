@@ -8,13 +8,14 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_dhvt3")
 
+[node name="SpearCollision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-7, 10, -6, 17, 6, 17, 7, 10, 7, -269, 6, -284, -6, -284, -7, -269)
+
 [node name="SpearSprite" type="Sprite2D" parent="."]
+modulate = Color(0.729412, 0.490196, 0.858824, 1)
 position = Vector2(0, -133.5)
 scale = Vector2(0.109375, 2.35156)
 texture = ExtResource("1_y0twt")
-
-[node name="SpearCollision" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-7, 10, -6, 17, 6, 17, 7, 10, 7, -269, 6, -284, -6, -284, -7, -269)
 
 [node name="UseTimer" type="Timer" parent="."]
 one_shot = true
