@@ -8,7 +8,7 @@ public partial class Enemy : CharacterBody2D
 	public const int jumpVelocity = -400;
 	public Player player;
 	public Timer selfDmgTimer;
-	public int health = 5;
+	public int health = 3;
 	public Color color;
 
     public override void _Ready()
@@ -32,7 +32,7 @@ public partial class Enemy : CharacterBody2D
 		float distance = player.Position.X - Position.X;
 		float above= Position.Y - player.Position.Y;
 
-		if(Math.Abs(distance)<=1000 && above > 64 && above < 700){
+		if(Math.Abs(distance)<=1000 && above > 64 && above < 300){
 			if(distance>100){
 				velocity.X = speed;
 			} else if(distance<-100){
@@ -41,13 +41,13 @@ public partial class Enemy : CharacterBody2D
 		}
 
 		
-		if(above > 64 && above < 700 && IsOnFloor()){
+		if(above > 64 && above < 300 && IsOnFloor()){
 			velocity.Y = jumpVelocity;
 		}
 
 		for(int i=0;i<GetSlideCollisionCount();i++){
 			var collision = GetSlideCollision(i);
-			if(collision.GetCollider() == player && player.dmgTimer.TimeLeft == 0 && selfDmgTimer.TimeLeft==0){
+			if(collision.GetCollider() == player && player.dmgTimer.TimeLeft == 0 && selfDmgTimer.TimeLeft==0 && player.weaponTimer.TimeLeft <.1){
 				GD.Print("hit da player");
 				player.takeDmg();
 			}
@@ -68,27 +68,27 @@ public partial class Enemy : CharacterBody2D
 		Modulate = new Color(255, color.G, color.B);
 		selfDmgTimer.Start();
 		health--;
-		GD.Print(body.Name);
 		if(player.Position.X-Position.X <0){
 			Position = new Vector2(Position.X+80, Position.Y);
 		} else{
 			Position = new Vector2(Position.X-80, Position.Y);
 		}
-		if(body.Name == "Sword"){
+		if(Convert.ToString(body.Name) == "Sword"){
 			health -=2;
 			GD.Print("big outch");
 			if(player.Position.X-Position.X <0){
-				Position = new Vector2(Position.X+30, Position.Y);
+				Position = new Vector2(Position.X+50, Position.Y);
 			} else{
-				Position = new Vector2(Position.X-30, Position.Y);
+				Position = new Vector2(Position.X-50, Position.Y);
 			}
 		}
 	}
 
 	public void fixColor(){
 		Modulate = color;
-		if(health == 0){
+		if(health <= 0){
 			player.count++;
+			GetParent().GetNode<Label>("End/Remaining").Text = GetNode<GlobalVariables>("/root/GlobalVariables").enemyCount-player.count+" Enemies Remain";
 			GD.Print("ded");
 			QueueFree();
 		}

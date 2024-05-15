@@ -12,7 +12,7 @@ public partial class Player : CharacterBody2D
 	public Timer weaponTimer;
 	public Timer dmgTimer;
 	public Color color;
-	public int health = 3;
+	public int health = 6;
 	public int count = 0;
 
     public override void _Ready()
@@ -22,6 +22,11 @@ public partial class Player : CharacterBody2D
 		scrollTimer = GetNode<Timer>("ScrollTimer");
 		weaponTimer = GetNode<Timer>("WeaponTimer");
 		dmgTimer = GetNode<Timer>("DmgTimer");
+		health = 6/globalVariables.level;
+		for(int i=5;i>=health;i--){
+			GD.Print("removing health"+i);
+			GetNode<Sprite2D>("UILayer/Health"+i).QueueFree();
+		}
 		
 		for(int i=0;i<globalVariables.inventory.Count;i++){
 			Sprite2D sprite = new Sprite2D();
@@ -31,6 +36,7 @@ public partial class Player : CharacterBody2D
 			sprite.Texture = (Texture2D) ResourceLoader.Load("icon.svg");
 			GetNode<CanvasLayer>("UILayer").AddChild(sprite, true);
 		}
+		GetParent().GetNode<Label>("End/Remaining").Text = globalVariables.enemyCount-count+" Enemies Remain";
     }
 
     public override void _PhysicsProcess(double delta)
@@ -129,6 +135,7 @@ public partial class Player : CharacterBody2D
 	}
 
 	public void endEntered(Node2D body){
+		GD.Print(count);
 		if(count==globalVariables.enemyCount){
 			GD.Print(count);
 			globalVariables.nextLvl();

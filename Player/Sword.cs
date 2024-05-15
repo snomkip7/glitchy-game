@@ -27,7 +27,13 @@ public partial class Sword : Weapon
 		} else{
 			Rotation += (float) (Math.PI*2/3 * delta*4);
 		}
-		Position = new Vector2(0,-30+offset).Rotated(Rotation);
+		Vector2 pos = new Vector2(0,-30+offset).Rotated(Rotation);
+		if(right){
+			pos.X -= 12;
+		} else{
+			pos.X += 12;
+		}
+		Position = pos;
 		MoveAndSlide();
 		if(player.weaponTimer.TimeLeft==0){
 			QueueFree();
@@ -39,7 +45,11 @@ public partial class Sword : Weapon
 		inUse = true;
 		this.target = target;
 		Rotation = 0;
-		if(GetAngleTo(target)<=Math.PI/2 || GetAngleTo(target)>Math.PI*1.5){
+		float angle = GetAngleTo(target);
+		if(angle<0){
+			angle = (float)Math.PI*2+angle;
+		}
+		if(angle<=Math.PI/2 || angle>Math.PI*1.5){
 			right = true;
 		}
 		//SetCollisionMaskValue(1, true);

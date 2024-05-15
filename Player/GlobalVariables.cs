@@ -12,9 +12,8 @@ public partial class GlobalVariables : Node
 	{
 		// get save file data
 		inventory = new List<PackedScene>();
-		PackedScene scene = (PackedScene) ResourceLoader.Load("res://Player/Spear.tscn");
-		inventory.Add(scene);
-		//inventory.Add(scene);
+		// PackedScene scene = (PackedScene) ResourceLoader.Load("res://Player/Spear.tscn");
+		// inventory.Add(scene);
 		PackedScene scene1 = (PackedScene) ResourceLoader.Load("res://Player/Sword.tscn");
 		inventory.Add(scene1);
 		
@@ -22,14 +21,25 @@ public partial class GlobalVariables : Node
 
 	public void nextLvl(){
 		level++;
-		if(level>1){
+		if(level>2){
 			GD.Print("there is no more levels m8");
-			CallDeferred("restart");
+			CallDeferred("win");
+		}
+		else{
+			if(level==2){
+				PackedScene scene = (PackedScene) ResourceLoader.Load("res://Player/Spear.tscn");
+				inventory.Add(scene);
+			}
+			CallDeferred("goToNext");
 		}
 	}
 
-	public void restart(){
-		GetTree().ChangeSceneToFile("res://MainMenu.tscn");
+	public void win(){
+		GetTree().ChangeSceneToFile("res://Win.tscn");
+	}
+
+	public void goToNext(){
+		GetTree().ChangeSceneToFile("res://Levels/Level"+level+".tscn");
 	}
 
 	

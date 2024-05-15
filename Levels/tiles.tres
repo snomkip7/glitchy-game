@@ -1,9 +1,10 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cvcadxyw5jh7a"]
 
-[ext_resource type="Texture2D" uid="uid://4k7wic63244w" path="res://Assets/Tiles/tempTile.png" id="1_6u7sf"]
+[ext_resource type="Texture2D" uid="uid://djqba55u1u3np" path="res://Assets/Tiles/iconTile.png" id="1_g0uqy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8kvv3"]
-texture = ExtResource("1_6u7sf")
+resource_name = "godot"
+texture = ExtResource("1_g0uqy")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dbgh6bcj1iu54"]
+
+[node name="Win" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 1920.0
+offset_bottom = 1083.0
+theme_override_font_sizes/font_size = 30
+text = "YOU WON
+GOOD JOB
+yeah the game was short
+did you like it?
+godot collision is weird
+Very Weird"
+horizontal_alignment = 1
+vertical_alignment = 1
